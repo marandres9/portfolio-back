@@ -14,7 +14,6 @@ public class About {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
-    
     @Column
     private String description;
 
