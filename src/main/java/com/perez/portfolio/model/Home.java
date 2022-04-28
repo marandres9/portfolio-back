@@ -14,13 +14,11 @@ public class Home {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
-
     @Column
     private String title;
-
     @Column
     private String description;
-    
+
     public int getId() {
         return this.id;
     }
