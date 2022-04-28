@@ -1,4 +1,4 @@
-package com.perez.portfolio.service;
+package com.perez.portfolio.service.home;
 
 import java.util.List;
 
