@@ -6,9 +6,11 @@ import com.perez.portfolio.dto.PortfolioDTO;
 import com.perez.portfolio.model.Education;
 import com.perez.portfolio.model.Home;
 import com.perez.portfolio.model.Skill;
+import com.perez.portfolio.model.Project;
 import com.perez.portfolio.service.about.AboutService;
 import com.perez.portfolio.service.education.EducationService;
 import com.perez.portfolio.service.home.HomeService;
+import com.perez.portfolio.service.project.ProjectService;
 import com.perez.portfolio.service.skill.SkillService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class PortfolioController {
     SkillService skillService;
     @Autowired
     EducationService educationService;
+    @Autowired
+    ProjectService projectService;
 
     // @GetMapping(path = "/home")
     // public Home getHome() {
@@ -47,7 +51,8 @@ public class PortfolioController {
             homeService.getHome(),
             aboutService.getAbout(),
             skillService.getAll(),
-            educationService.getAll()
+            educationService.getAll(),
+            projectService.getAll()
         );
     }
 
@@ -59,6 +64,11 @@ public class PortfolioController {
     @GetMapping(path = "/test/education")
     public List<Education> geteducation() {
         return this.educationService.getAll();
+    }
+
+    @GetMapping(path = "/test/projects")
+    public List<Project> getProjects() {
+        return this.projectService.getAll();
     }
     
 }
