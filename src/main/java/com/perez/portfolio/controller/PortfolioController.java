@@ -1,9 +1,13 @@
 package com.perez.portfolio.controller;
 
+import java.util.List;
+
 import com.perez.portfolio.dto.PortfolioDTO;
 import com.perez.portfolio.model.Home;
-import com.perez.portfolio.service.AboutService;
-import com.perez.portfolio.service.HomeService;
+import com.perez.portfolio.model.Skill;
+import com.perez.portfolio.service.about.AboutService;
+import com.perez.portfolio.service.home.HomeService;
+import com.perez.portfolio.service.skill.SkillService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +24,8 @@ public class PortfolioController {
     HomeService homeService;
     @Autowired
     AboutService aboutService;
+    @Autowired
+    SkillService skillService;
 
     // @GetMapping(path = "/home")
     // public Home getHome() {
@@ -33,7 +39,16 @@ public class PortfolioController {
 
     @GetMapping(path = "/portfolio/get")
     public PortfolioDTO getPortfolio() {
-        return new PortfolioDTO(homeService.getHome(), aboutService.getAbout());
+        return new PortfolioDTO(
+            homeService.getHome(),
+            aboutService.getAbout(),
+            skillService.getAll()
+        );
+    }
+
+    @GetMapping(path = "/test/skills")
+    public List<Skill> getSkills() {
+        return this.skillService.getAll();
     }
     
 }
