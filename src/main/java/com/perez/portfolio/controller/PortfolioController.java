@@ -50,7 +50,8 @@ public class PortfolioController {
         return new PortfolioDTO(
             homeService.getHome(),
             aboutService.getAbout(),
-            skillService.getAll(),
+            skillService.getHardSkills(),
+            skillService.getSoftSkills(),
             educationService.getAll(),
             projectService.getAll()
         );
@@ -58,7 +59,7 @@ public class PortfolioController {
 
     @GetMapping(path = "/test/skills")
     public List<Skill> getSkills() {
-        return this.skillService.getAll();
+        return this.skillService.getHardSkills();
     }
 
     @GetMapping(path = "/test/education")

@@ -27,4 +27,14 @@ public class SkillService implements SkillServiceInterface {
     public Skill createSkill(Skill skill) {
         return skillRepo.save(skill);
     }
+
+    @Override
+    public List<Skill> getSoftSkills() {
+        return skillRepo.findBysoftSkillTrue();
+    }
+
+    @Override
+    public List<Skill> getHardSkills() {
+        return skillRepo.findBysoftSkillFalse();
+    }
 }

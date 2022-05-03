@@ -12,21 +12,40 @@ public class PortfolioDTO {
     private String home_title;
     private String home_description;
     private String about_description;
-    private List<Skill> skills;
+    private List<Skill> hardSkills;
+    private List<Skill> softSkills;
     private List<Education> educations;
     private List<Project> projects;
     
     public PortfolioDTO(Home home,
                         About about,
-                        List<Skill> skills,
+                        List<Skill> hardSkills,
+                        List<Skill> softSkills,
                         List<Education> educations,
                         List<Project> projects) {
         this.home_title = home.getTitle();
         this.home_description = home.getDescription();
         this.about_description = about.getDescription();
-        this.skills = skills;
+        this.hardSkills = hardSkills;
+        this.softSkills = softSkills;
         this.educations = educations;
         this.projects = projects;
+    }
+
+    public List<Skill> getHardSkills() {
+        return this.hardSkills;
+    }
+
+    public void setHardSkills(List<Skill> hardSkills) {
+        this.hardSkills = hardSkills;
+    }
+
+    public List<Skill> getSoftSkills() {
+        return this.softSkills;
+    }
+
+    public void setSoftSkills(List<Skill> softSkills) {
+        this.softSkills = softSkills;
     }
 
     public String getHome_title() {
@@ -49,7 +68,7 @@ public class PortfolioDTO {
         this.projects = projects;
     }
 
-    public void setEducation(List<Education> educations) {
+    public void setEducations(List<Education> educations) {
         this.educations = educations;
     }
 
@@ -68,13 +87,5 @@ public class PortfolioDTO {
     public void setAbout_description(String about_description) {
         this.about_description = about_description;
     }
-
-    public List<Skill> getSkills() {
-        return this.skills;
-    }
-
-    public void setSkills(List<Skill> skills) {
-        this.skills = skills;
-    }
-
+    
 }

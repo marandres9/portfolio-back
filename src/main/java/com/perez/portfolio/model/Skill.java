@@ -18,6 +18,8 @@ public class Skill {
     private String title;
     @Column
     private byte value;
+    @Column(name = "soft_skill")
+    private boolean softSkill;
 
     public int getId() {
         return this.id;
@@ -37,6 +39,14 @@ public class Skill {
 
     public void setValue(byte value) {
         this.value = value;
+    }
+
+    public boolean isSoftSkill() {
+        return this.softSkill;
+    }
+
+    public void setSoftSkill(boolean soft) {
+        this.softSkill = soft;
     }
 
 }
