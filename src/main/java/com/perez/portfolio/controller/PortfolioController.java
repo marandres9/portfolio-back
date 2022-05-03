@@ -15,7 +15,9 @@ import com.perez.portfolio.service.skill.SkillService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,6 +58,12 @@ public class PortfolioController {
             projectService.getAll()
         );
     }
+
+    @DeleteMapping(path = "/portfolio/skills/delete/{id}")
+    public void deleteSkill(@PathVariable int id) {
+        this.skillService.deleteSkill(id);
+    }
+
 
     @GetMapping(path = "/test/skills")
     public List<Skill> getSkills() {

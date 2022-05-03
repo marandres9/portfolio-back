@@ -37,4 +37,9 @@ public class SkillService implements SkillServiceInterface {
     public List<Skill> getHardSkills() {
         return skillRepo.findBysoftSkillFalse();
     }
+
+    @Override
+    public void deleteSkill(int id) {
+        skillRepo.deleteById(id);
+    }
 }
