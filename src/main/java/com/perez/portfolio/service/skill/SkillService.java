@@ -19,12 +19,12 @@ public class SkillService implements SkillServiceInterface {
     }
 
     @Override
-    public Skill getSkill() {
-        return getAll().get(0);
+    public Skill getSkill(int id) {
+        return skillRepo.findById(id).orElse(null);
     }
 
     @Override
-    public Skill createSkill(Skill skill) {
+    public Skill saveSkill(Skill skill) {
         return skillRepo.save(skill);
     }
 
@@ -41,5 +41,20 @@ public class SkillService implements SkillServiceInterface {
     @Override
     public void deleteSkill(int id) {
         skillRepo.deleteById(id);
+    }
+
+    @Override
+    public Skill updateSkill(int id, String title, byte value) {
+        // get and check not null
+        Skill skill = this.getSkill(id);
+        if(skill == null) return null;
+        // update values
+        skill.setTitle(title);
+        skill.setValue(value);
+
+        // save changes
+        this.saveSkill(skill);
+
+        return skill;
     }
 }

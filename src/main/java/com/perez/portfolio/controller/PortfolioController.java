@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -78,6 +80,11 @@ public class PortfolioController {
     @GetMapping(path = "/test/projects")
     public List<Project> getProjects() {
         return this.projectService.getAll();
+    }
+
+    @PutMapping(path = "/skills/update/{id}")
+    public Skill updateSkill(@PathVariable int id, @RequestParam String title, @RequestParam byte value) {
+        return this.skillService.updateSkill(id, title, value);
     }
     
 }
