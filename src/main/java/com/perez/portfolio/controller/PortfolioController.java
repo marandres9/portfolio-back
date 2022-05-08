@@ -86,5 +86,10 @@ public class PortfolioController {
     public Skill updateSkill(@PathVariable int id, @RequestParam String title, @RequestParam byte value) {
         return this.skillService.updateSkill(id, title, value);
     }
+
+    @PostMapping(path = "skills/save")
+    public Skill saveSkill(@RequestBody Skill skill) {
+        return this.skillService.saveSkill(skill);
+    }
     
 }
