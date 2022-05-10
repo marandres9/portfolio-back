@@ -19,12 +19,33 @@ public class EducationService implements EducationServiceInterface {
     }
 
     @Override
-    public Education getEducation() {
-        return getAll().get(0);
+    public Education getEducation(int id) {
+        return educationRepo.findById(id).orElse(null);
     }
 
     @Override
-    public Education createEducation(Education education) {
+    public Education saveEducation(Education education) {
         return educationRepo.save(education);
+    }
+
+    @Override
+    public void deleteEducation(int id) {
+        educationRepo.deleteById(id);
+    }
+
+    @Override
+    public Education updateEducation(int id, String title, String period, String institution, String location, String description) {
+        // get and check not null
+        Education ed = this.getEducation(id);
+        if(ed == null) return null;
+        // update values
+        ed.setTitle(title);
+        ed.setPeriod(period);
+        ed.setInstitution(institution);
+        ed.setLocation(location);
+        ed.setDescription(description);
+
+        // save changes
+        return this.saveEducation(ed);
     }
 }

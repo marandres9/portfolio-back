@@ -6,6 +6,12 @@ import com.perez.portfolio.model.Education;
 
 public interface EducationServiceInterface {
     public List<Education> getAll();
-    public Education getEducation();
-    public Education createEducation(Education education);
+
+    public Education getEducation(int id);
+
+    public Education saveEducation(Education education);
+
+    public void deleteEducation(int id);
+
+    public Education updateEducation(int id, String title, String period, String institution, String location, String description);
 }
