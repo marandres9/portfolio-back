@@ -3,6 +3,7 @@ package com.perez.portfolio.controller;
 import java.util.List;
 
 import com.perez.portfolio.dto.PortfolioDTO;
+import com.perez.portfolio.model.About;
 import com.perez.portfolio.model.Education;
 import com.perez.portfolio.model.Home;
 import com.perez.portfolio.model.Skill;
@@ -39,16 +40,6 @@ public class PortfolioController {
     @Autowired
     ProjectService projectService;
 
-    // @GetMapping(path = "/home")
-    // public Home getHome() {
-    //     return homeService.getHome();
-    // }
-
-    @PostMapping(path = "/home")
-    public Home createHome(@RequestBody Home home) {
-        return homeService.createHome(home);
-    }
-
     @GetMapping(path = "/portfolio/get")
     public PortfolioDTO getPortfolio() {
         return new PortfolioDTO(
@@ -61,12 +52,60 @@ public class PortfolioController {
         );
     }
 
-    @DeleteMapping(path = "/portfolio/skills/delete/{id}")
+    // === HOME ===
+    @PutMapping(path = "/portfolio/edit/home/update")
+    public Home updateHome(@RequestParam String title, @RequestParam String description) {
+        return this.homeService.updateHome(title, description);
+    }
+    
+    // === ABOUT ===
+    @PutMapping(path = "/portfolio/edit/about/update")
+    public About updateAbout(@RequestParam String description) {
+        return this.aboutService.updateAbout(description);
+    }
+    
+    // === SKILLS ===
+    @DeleteMapping(path = "/portfolio/edit/skills/delete/{id}")
     public void deleteSkill(@PathVariable int id) {
         this.skillService.deleteSkill(id);
     }
 
+    @PutMapping(path = "/portfolio/edit/skills/update/{id}")
+    public Skill updateSkill(@PathVariable int id, @RequestParam String title, @RequestParam byte value) {
+        return this.skillService.updateSkill(id, title, value);
+    }
 
+    @PostMapping(path = "/portfolio/edit/skills/save")
+    public Skill saveSkill(@RequestBody Skill skill) {
+        return this.skillService.saveSkill(skill);
+    }
+    
+    // === EDUCATION ===
+    @DeleteMapping(path = "/portfolio/edit/education/delete/{id}")
+    public void delteEducation(@PathVariable int id) {
+        this.educationService.deleteEducation(id);
+    }
+
+    @PutMapping(path = "/portfolio/edit/education/update/{id}")
+    public Education updateEducation(
+        @PathVariable int id,
+        @RequestParam String title,
+        @RequestParam String period,
+        @RequestParam String institution,
+        @RequestParam String location,
+        @RequestParam String description) {
+        return this.educationService.updateEducation(id, title, period, institution, location, description);
+    }
+
+    @PostMapping(path = "/portfolio/edit/education/save")
+    public Education saveEducation(@RequestBody Education ed) {
+        return this.educationService.saveEducation(ed);
+    }
+
+    // === EDUCATION ===
+    
+
+    // === TEST ===
     @GetMapping(path = "/test/skills")
     public List<Skill> getSkills() {
         return this.skillService.getHardSkills();
@@ -80,16 +119,6 @@ public class PortfolioController {
     @GetMapping(path = "/test/projects")
     public List<Project> getProjects() {
         return this.projectService.getAll();
-    }
-
-    @PutMapping(path = "/skills/update/{id}")
-    public Skill updateSkill(@PathVariable int id, @RequestParam String title, @RequestParam byte value) {
-        return this.skillService.updateSkill(id, title, value);
-    }
-
-    @PostMapping(path = "skills/save")
-    public Skill saveSkill(@RequestBody Skill skill) {
-        return this.skillService.saveSkill(skill);
     }
     
 }
