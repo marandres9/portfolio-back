@@ -6,6 +6,10 @@ import com.perez.portfolio.model.Home;
 
 public interface HomeServiceInterface {
     public List<Home> getAll();
+    
     public Home getHome();
-    public Home createHome(Home home);
+    
+    public Home saveHome(Home home);
+
+    public Home updateHome(String title, String description);
 }

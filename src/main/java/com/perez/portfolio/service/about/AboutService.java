@@ -24,7 +24,21 @@ public class AboutService implements AboutServiceInterface {
     }
 
     @Override
-    public About createAbout(About about) {
+    public About saveAbout(About about) {
         return aboutRepo.save(about);
+    }
+
+    @Override
+    public About updateAbout(String description) {
+         // get and check not null
+         About about = this.getAbout();
+         if(about == null) return null;
+         // update values
+         about.setDescription(description);
+ 
+         // save changes
+         this.saveAbout(about);
+ 
+         return about;
     }
 }

@@ -9,5 +9,7 @@ public interface AboutServiceInterface {
 
     public About getAbout();
 
-    public About createAbout(About about);
+    public About saveAbout(About about);
+
+    public About updateAbout(String description);
 }

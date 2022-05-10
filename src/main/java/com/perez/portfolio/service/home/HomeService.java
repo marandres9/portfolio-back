@@ -24,7 +24,23 @@ public class HomeService implements HomeServiceInterface {
     }
 
     @Override
-    public Home createHome(Home home) {
+    public Home saveHome(Home home) {
         return homeRepo.save(home);
     }
+
+    @Override
+    public Home updateHome(String title, String description) {
+        // get and check not null
+        Home home = this.getHome();
+        if(home == null) return null;
+        // update values
+        home.setTitle(title);
+        home.setDescription(description);
+
+        // save changes
+        this.saveHome(home);
+
+        return home;
+    }
+
 }
