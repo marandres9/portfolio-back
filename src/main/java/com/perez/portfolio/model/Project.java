@@ -18,6 +18,20 @@ public class Project {
     private String title;
     @Column
     private String description;
+    @Column
+    private String url;
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUrl() {
+        return this.url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public int getId() {
         return this.id;

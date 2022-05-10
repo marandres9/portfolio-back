@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.perez.portfolio.model.About;
 import com.perez.portfolio.model.Education;
+import com.perez.portfolio.model.Experience;
 import com.perez.portfolio.model.Home;
 import com.perez.portfolio.model.Skill;
 import com.perez.portfolio.model.Project;
@@ -15,6 +16,7 @@ public class PortfolioDTO {
     private List<Skill> hardSkills;
     private List<Skill> softSkills;
     private List<Education> educations;
+    private List<Experience> experiences;
     private List<Project> projects;
     
     public PortfolioDTO(Home home,
@@ -22,6 +24,7 @@ public class PortfolioDTO {
                         List<Skill> hardSkills,
                         List<Skill> softSkills,
                         List<Education> educations,
+                        List<Experience> experiences,
                         List<Project> projects) {
         this.home_title = home.getTitle();
         this.home_description = home.getDescription();
@@ -29,6 +32,7 @@ public class PortfolioDTO {
         this.hardSkills = hardSkills;
         this.softSkills = softSkills;
         this.educations = educations;
+        this.experiences = experiences;
         this.projects = projects;
     }
 
@@ -38,6 +42,14 @@ public class PortfolioDTO {
 
     public void setHardSkills(List<Skill> hardSkills) {
         this.hardSkills = hardSkills;
+    }
+
+    public List<Experience> getExperiences() {
+        return this.experiences;
+    }
+
+    public void setExperiences(List<Experience> experience) {
+        this.experiences = experience;
     }
 
     public List<Skill> getSoftSkills() {

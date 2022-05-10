@@ -5,11 +5,13 @@ import java.util.List;
 import com.perez.portfolio.dto.PortfolioDTO;
 import com.perez.portfolio.model.About;
 import com.perez.portfolio.model.Education;
+import com.perez.portfolio.model.Experience;
 import com.perez.portfolio.model.Home;
 import com.perez.portfolio.model.Skill;
 import com.perez.portfolio.model.Project;
 import com.perez.portfolio.service.about.AboutService;
 import com.perez.portfolio.service.education.EducationService;
+import com.perez.portfolio.service.experience.ExperienceService;
 import com.perez.portfolio.service.home.HomeService;
 import com.perez.portfolio.service.project.ProjectService;
 import com.perez.portfolio.service.skill.SkillService;
@@ -38,6 +40,8 @@ public class PortfolioController {
     @Autowired
     EducationService educationService;
     @Autowired
+    ExperienceService experienceService;
+    @Autowired
     ProjectService projectService;
 
     @GetMapping(path = "/portfolio/get")
@@ -48,6 +52,7 @@ public class PortfolioController {
             skillService.getHardSkills(),
             skillService.getSoftSkills(),
             educationService.getAll(),
+            experienceService.getAll(),
             projectService.getAll()
         );
     }
@@ -82,7 +87,7 @@ public class PortfolioController {
     
     // === EDUCATION ===
     @DeleteMapping(path = "/portfolio/edit/education/delete/{id}")
-    public void delteEducation(@PathVariable int id) {
+    public void deleteEducation(@PathVariable int id) {
         this.educationService.deleteEducation(id);
     }
 
@@ -102,9 +107,48 @@ public class PortfolioController {
         return this.educationService.saveEducation(ed);
     }
 
-    // === EDUCATION ===
-    
+    // === EXPERIENCE ===
+    @DeleteMapping(path = "/portfolio/edit/experience/delete/{id}")
+    public void deleteExperience(@PathVariable int id) {
+        this.experienceService.deleteExperience(id);
+    }
 
+    @PutMapping(path = "/portfolio/edit/experience/update/{id}")
+    public Experience updateExperience(
+        @PathVariable int id,
+        @RequestParam String title,
+        @RequestParam String period,
+        @RequestParam String institution,
+        @RequestParam String location,
+        @RequestParam String description) {
+        return this.experienceService.updateExperience(id, title, period, institution, location, description);
+    }
+
+    @PostMapping(path = "/portfolio/edit/experience/save")
+    public Experience saveExperience(@RequestBody Experience ed) {
+        return this.experienceService.saveExperience(ed);
+    }
+
+    // === PROJECTS ===
+    @DeleteMapping(path = "/portfolio/edit/projects/delete/{id}")
+    public void deleteProject(@PathVariable int id) {
+        this.projectService.deleteProject(id);
+    }
+
+    @PutMapping(path = "/portfolio/edit/projects/update/{id}")
+    public Project updateProject(
+        @PathVariable int id,
+        @RequestParam String title,
+        @RequestParam String description,
+        @RequestParam String url) {
+        return this.projectService.updateProject(id, title, description, url);
+    }
+
+    @PostMapping(path = "/portfolio/edit/projects/save")
+    public Project saveProject(@RequestBody Project proj) {
+        return this.projectService.saveProject(proj);
+    }
+    
     // === TEST ===
     @GetMapping(path = "/test/skills")
     public List<Skill> getSkills() {
