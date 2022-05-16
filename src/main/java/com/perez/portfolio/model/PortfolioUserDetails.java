@@ -1,14 +1,13 @@
-package com.perez.portfolio.security;
+package com.perez.portfolio.model;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+// import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import com.perez.portfolio.model.PortfolioUser;
+// import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+// import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class PortfolioUserDetails implements UserDetails {
@@ -21,10 +20,12 @@ public class PortfolioUserDetails implements UserDetails {
     public PortfolioUserDetails(PortfolioUser user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
-        this.active = user.isActive();
-        this.authorities = Arrays.stream(user.getRoles().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        // this.active = user.isActive();
+        // this.authorities = Arrays.stream(user.getRoles().split(","))
+        //         .map(SimpleGrantedAuthority::new)
+        //         .collect(Collectors.toList());
+        // not using authorities
+        this.authorities = new ArrayList<>();
     }
 
     @Override

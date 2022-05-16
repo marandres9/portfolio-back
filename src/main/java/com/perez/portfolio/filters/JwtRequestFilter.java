@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.perez.portfolio.security.JwtUtil;
-import com.perez.portfolio.security.PortfolioUserDetailsService;
+import com.perez.portfolio.security.PortfolioUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +22,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private PortfolioUserDetailsService userDetailsService;
+    private PortfolioUserService userDetailsService;
 
     @Autowired
     private JwtUtil jwtTokenUtil;

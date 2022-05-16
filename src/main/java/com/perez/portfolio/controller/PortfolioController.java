@@ -11,7 +11,7 @@ import com.perez.portfolio.model.Experience;
 import com.perez.portfolio.model.Home;
 import com.perez.portfolio.model.Skill;
 import com.perez.portfolio.security.JwtUtil;
-import com.perez.portfolio.security.PortfolioUserDetailsService;
+import com.perez.portfolio.security.PortfolioUserService;
 import com.perez.portfolio.model.Project;
 import com.perez.portfolio.service.about.AboutService;
 import com.perez.portfolio.service.education.EducationService;
@@ -183,7 +183,7 @@ public class PortfolioController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private PortfolioUserDetailsService userDetailsService;
+    private PortfolioUserService userDetailsService;
     
     @Autowired
     private JwtUtil jwtTokenUtil;

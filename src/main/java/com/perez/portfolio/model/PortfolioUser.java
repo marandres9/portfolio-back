@@ -1,59 +1,71 @@
 package com.perez.portfolio.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "user")
-public class PortfolioUser {
+public class PortfolioUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String username;
     private String password;
     private boolean active;
-    private String roles;
 
-    public int getId() {
-        return id;
+    // not using roles - not mapped to DB
+    @Transient
+    private List<GrantedAuthority> authorities;
+
+    public PortfolioUser() {
+        this.authorities = new ArrayList<>();
+    }
+    
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.authorities;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
+    @Override
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public String getUsername() {
+        return this.username;
     }
 
-    public boolean isActive() {
-        return active;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public String getRoles() {
-        return roles;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    @Override
+    public boolean isEnabled() {
+        return this.active;
     }
+
+    
 }

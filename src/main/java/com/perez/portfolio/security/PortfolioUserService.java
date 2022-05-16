@@ -1,6 +1,5 @@
 package com.perez.portfolio.security;
 
-import com.perez.portfolio.model.PortfolioUser;
 import com.perez.portfolio.repository.PortfolioUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PortfolioUserDetailsService implements UserDetailsService {
+public class PortfolioUserService implements UserDetailsService {
     
     @Autowired
     PortfolioUserRepository userRepo;
@@ -21,10 +20,10 @@ public class PortfolioUserDetailsService implements UserDetailsService {
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        PortfolioUser user =  userRepo.findByUsername(username)
+        return userRepo.findByUsername(username)
         .orElseThrow(() -> new UsernameNotFoundException("Username not found: " + username));
 
-        return new PortfolioUserDetails(user);
+        // return new PortfolioUser(user);
         // return new User("foo", "foo", new ArrayList<>());
     }
 }
