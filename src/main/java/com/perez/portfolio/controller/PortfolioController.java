@@ -4,10 +4,14 @@ import java.util.List;
 
 import com.perez.portfolio.dto.PortfolioDTO;
 import com.perez.portfolio.model.About;
+import com.perez.portfolio.model.AuthRequest;
+import com.perez.portfolio.model.AuthResponse;
 import com.perez.portfolio.model.Education;
 import com.perez.portfolio.model.Experience;
 import com.perez.portfolio.model.Home;
 import com.perez.portfolio.model.Skill;
+import com.perez.portfolio.security.JwtUtil;
+import com.perez.portfolio.security.PortfolioUserDetailsService;
 import com.perez.portfolio.model.Project;
 import com.perez.portfolio.service.about.AboutService;
 import com.perez.portfolio.service.education.EducationService;
@@ -17,6 +21,11 @@ import com.perez.portfolio.service.project.ProjectService;
 import com.perez.portfolio.service.skill.SkillService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+// @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class PortfolioController {
     @Autowired
     HomeService homeService;
@@ -165,4 +174,35 @@ public class PortfolioController {
         return this.projectService.getAll();
     }
     
+    @GetMapping("/hello")
+    public String helo() {
+        return "Hello world!";
+    }
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PortfolioUserDetailsService userDetailsService;
+    
+    @Autowired
+    private JwtUtil jwtTokenUtil;
+    
+    @PostMapping(path = "/auth")
+    public ResponseEntity<?> createAuthToken(@RequestBody AuthRequest authReq) throws Exception {
+        try {
+            authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authReq.getUsername(), authReq.getPassword())
+            );
+        } catch (BadCredentialsException e) {
+            throw new Exception("Incorrect username or password", e);
+        }
+
+        final UserDetails userDetails = userDetailsService
+            .loadUserByUsername(authReq.getUsername());
+
+        final String jwt = jwtTokenUtil.generateToken(userDetails);
+
+        return ResponseEntity.ok(new AuthResponse(jwt));
+    }
 }
