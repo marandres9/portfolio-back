@@ -30,7 +30,7 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY)
+        return Jwts.parser().setAllowedClockSkewSeconds(180).setSigningKey(SECRET_KEY)
             .parseClaimsJws(token)
             .getBody();
     }
