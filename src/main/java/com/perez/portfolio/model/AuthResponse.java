@@ -7,7 +7,7 @@ public class AuthResponse {
         this.token = token;
     }
     
-    public String getJwt() {
+    public String getToken() {
         return this.token;
     }
 }
