@@ -37,8 +37,7 @@ public class AboutService implements AboutServiceInterface {
          about.setDescription(description);
  
          // save changes
-         this.saveAbout(about);
+        return this.saveAbout(about);
  
-         return about;
     }
 }
