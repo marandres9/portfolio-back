@@ -74,6 +74,7 @@ public class PortfolioController {
     // }
     @PutMapping(path = "/portfolio/edit/home/update")
     public Home updateHome(@RequestBody Home home) {
+        System.out.println("received:" + home.toString());
         return this.homeService.updateHome(home.getTitle(), home.getDescription());
     }
     
