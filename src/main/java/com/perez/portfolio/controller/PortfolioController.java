@@ -68,24 +68,15 @@ public class PortfolioController {
     }
 
     // === HOME ===
-    // @PutMapping(path = "/portfolio/edit/home/update")
-    // public Home updateHome(@RequestParam String title, @RequestParam String description) {
-    //     return this.homeService.updateHome(title, description);
-    // }
     @PutMapping(path = "/portfolio/edit/home/update")
-    public Home updateHome(@RequestBody Home home) {
-        System.out.println("received:" + home.toString());
-        return this.homeService.updateHome(home.getTitle(), home.getDescription());
+    public Home updateHome(@RequestParam String title, @RequestParam String description) {
+        return this.homeService.updateHome(title, description);
     }
     
     // === ABOUT ===
-    // @PutMapping(path = "/portfolio/edit/about/update")
-    // public About updateAbout(@RequestParam String description) {
-    //     return this.aboutService.updateAbout(description);
-    // }
     @PutMapping(path = "/portfolio/edit/about/update")
-    public About updateAbout(@RequestBody About about) {
-        return this.aboutService.updateAbout(about.getDescription());
+    public About updateAbout(@RequestParam String description) {
+        return this.aboutService.updateAbout(description);
     }
     
     // === SKILLS ===
@@ -94,13 +85,9 @@ public class PortfolioController {
         this.skillService.deleteSkill(id);
     }
 
-    // @PutMapping(path = "/portfolio/edit/skills/update/{id}")
-    // public Skill updateSkill(@PathVariable int id, @RequestParam String title, @RequestParam byte value) {
-    //     return this.skillService.updateSkill(id, title, value);
-    // }
     @PutMapping(path = "/portfolio/edit/skills/update/{id}")
-    public Skill updateSkill(@PathVariable int id, @RequestBody Skill skill) {
-        return this.skillService.updateSkill(id, skill.getTitle(), skill.getValue());
+    public Skill updateSkill(@PathVariable int id, @RequestParam String title, @RequestParam byte value) {
+        return this.skillService.updateSkill(id, title, value);
     }
 
     @PostMapping(path = "/portfolio/edit/skills/save")
