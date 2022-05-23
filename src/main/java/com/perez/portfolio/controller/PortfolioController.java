@@ -1,7 +1,5 @@
 package com.perez.portfolio.controller;
 
-import java.util.List;
-
 import com.perez.portfolio.dto.PortfolioDTO;
 import com.perez.portfolio.model.About;
 import com.perez.portfolio.model.AuthRequest;
@@ -70,18 +68,21 @@ public class PortfolioController {
         System.out.println("received" + home.toString());
         return this.homeService.updateHome(home.getTitle(), home.getDescription());
     }
+    // === END HOME ===
 
     // === ABOUT ===
     @PutMapping(path = "/portfolio/edit/about/update")
     public About updateAbout(@RequestBody About about) {
         return this.aboutService.updateAbout(about.getDescription());
     }
+    // === END ABOUT ===
 
     // === SKILLS ===
     @DeleteMapping(path = "/portfolio/edit/skills/delete/{id}")
     public void deleteSkill(@PathVariable int id) {
         this.skillService.deleteSkill(id);
     }
+    // === END SKILLS ===
 
     @PutMapping(path = "/portfolio/edit/skills/update/{id}")
     public Skill updateSkill(@PathVariable int id, @RequestBody Skill skill) {
@@ -114,6 +115,7 @@ public class PortfolioController {
     public Education saveEducation(@RequestBody Education ed) {
         return this.educationService.saveEducation(ed);
     }
+    // === END EDUCATION ===
 
     // === EXPERIENCE ===
     @DeleteMapping(path = "/portfolio/edit/experience/delete/{id}")
@@ -138,6 +140,7 @@ public class PortfolioController {
     public Experience saveExperience(@RequestBody Experience ed) {
         return this.experienceService.saveExperience(ed);
     }
+    // === END EXPERIENCE ===
 
     // === PROJECTS ===
     @DeleteMapping(path = "/portfolio/edit/projects/delete/{id}")
@@ -160,28 +163,10 @@ public class PortfolioController {
     public Project saveProject(@RequestBody Project proj) {
         return this.projectService.saveProject(proj);
     }
+        // === END PROJECTS ===
 
-    // === TEST ===
-    @GetMapping(path = "/test/skills")
-    public List<Skill> getSkills() {
-        return this.skillService.getHardSkills();
-    }
 
-    @GetMapping(path = "/test/education")
-    public List<Education> geteducation() {
-        return this.educationService.getAll();
-    }
-
-    @GetMapping(path = "/test/projects")
-    public List<Project> getProjects() {
-        return this.projectService.getAll();
-    }
-
-    @GetMapping("/hello")
-    public String helo() {
-        return "Hello world!";
-    }
-
+    // === LOGIN/AUTHENTICATION ===
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -207,4 +192,5 @@ public class PortfolioController {
 
         return ResponseEntity.ok(new AuthResponse(jwt));
     }
+    // === END LOGIN/AUTHENTICATION ===
 }
