@@ -34,8 +34,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 // @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -57,28 +55,28 @@ public class PortfolioController {
     @GetMapping(path = "/portfolio/get")
     public PortfolioDTO getPortfolio() {
         return new PortfolioDTO(
-            homeService.getHome(),
-            aboutService.getAbout(),
-            skillService.getHardSkills(),
-            skillService.getSoftSkills(),
-            educationService.getAll(),
-            experienceService.getAll(),
-            projectService.getAll()
-        );
+                homeService.getHome(),
+                aboutService.getAbout(),
+                skillService.getHardSkills(),
+                skillService.getSoftSkills(),
+                educationService.getAll(),
+                experienceService.getAll(),
+                projectService.getAll());
     }
 
     // === HOME ===
     @PutMapping(path = "/portfolio/edit/home/update")
-    public Home updateHome(@RequestParam String title, @RequestParam String description) {
-        return this.homeService.updateHome(title, description);
+    public Home updateHome(@RequestBody Home home) {
+        System.out.println("received" + home.toString());
+        return this.homeService.updateHome(home.getTitle(), home.getDescription());
     }
-    
+
     // === ABOUT ===
     @PutMapping(path = "/portfolio/edit/about/update")
-    public About updateAbout(@RequestParam String description) {
-        return this.aboutService.updateAbout(description);
+    public About updateAbout(@RequestBody About about) {
+        return this.aboutService.updateAbout(about.getDescription());
     }
-    
+
     // === SKILLS ===
     @DeleteMapping(path = "/portfolio/edit/skills/delete/{id}")
     public void deleteSkill(@PathVariable int id) {
@@ -86,15 +84,15 @@ public class PortfolioController {
     }
 
     @PutMapping(path = "/portfolio/edit/skills/update/{id}")
-    public Skill updateSkill(@PathVariable int id, @RequestParam String title, @RequestParam byte value) {
-        return this.skillService.updateSkill(id, title, value);
+    public Skill updateSkill(@PathVariable int id, @RequestBody Skill skill) {
+        return this.skillService.updateSkill(id, skill.getTitle(), skill.getValue());
     }
 
     @PostMapping(path = "/portfolio/edit/skills/save")
     public Skill saveSkill(@RequestBody Skill skill) {
         return this.skillService.saveSkill(skill);
     }
-    
+
     // === EDUCATION ===
     @DeleteMapping(path = "/portfolio/edit/education/delete/{id}")
     public void deleteEducation(@PathVariable int id) {
@@ -102,14 +100,14 @@ public class PortfolioController {
     }
 
     @PutMapping(path = "/portfolio/edit/education/update/{id}")
-    public Education updateEducation(
-        @PathVariable int id,
-        @RequestParam String title,
-        @RequestParam String period,
-        @RequestParam String institution,
-        @RequestParam String location,
-        @RequestParam String description) {
-        return this.educationService.updateEducation(id, title, period, institution, location, description);
+    public Education updateEducation(@PathVariable int id, @RequestBody Education ed) {
+        return this.educationService.updateEducation(
+                id,
+                ed.getTitle(),
+                ed.getPeriod(),
+                ed.getInstitution(),
+                ed.getLocation(),
+                ed.getDescription());
     }
 
     @PostMapping(path = "/portfolio/edit/education/save")
@@ -125,13 +123,15 @@ public class PortfolioController {
 
     @PutMapping(path = "/portfolio/edit/experience/update/{id}")
     public Experience updateExperience(
-        @PathVariable int id,
-        @RequestParam String title,
-        @RequestParam String period,
-        @RequestParam String institution,
-        @RequestParam String location,
-        @RequestParam String description) {
-        return this.experienceService.updateExperience(id, title, period, institution, location, description);
+            @PathVariable int id,
+            @RequestBody Experience exp) {
+        return this.experienceService.updateExperience(
+                id,
+                exp.getTitle(),
+                exp.getPeriod(),
+                exp.getInstitution(),
+                exp.getLocation(),
+                exp.getDescription());
     }
 
     @PostMapping(path = "/portfolio/edit/experience/save")
@@ -147,18 +147,20 @@ public class PortfolioController {
 
     @PutMapping(path = "/portfolio/edit/projects/update/{id}")
     public Project updateProject(
-        @PathVariable int id,
-        @RequestParam String title,
-        @RequestParam String description,
-        @RequestParam String url) {
-        return this.projectService.updateProject(id, title, description, url);
+            @PathVariable int id,
+            @RequestBody Project proj) {
+        return this.projectService.updateProject(
+            id,
+            proj.getTitle(),
+            proj.getDescription(),
+            proj.getUrl());
     }
 
     @PostMapping(path = "/portfolio/edit/projects/save")
     public Project saveProject(@RequestBody Project proj) {
         return this.projectService.saveProject(proj);
     }
-    
+
     // === TEST ===
     @GetMapping(path = "/test/skills")
     public List<Skill> getSkills() {
@@ -174,7 +176,7 @@ public class PortfolioController {
     public List<Project> getProjects() {
         return this.projectService.getAll();
     }
-    
+
     @GetMapping("/hello")
     public String helo() {
         return "Hello world!";
@@ -185,22 +187,21 @@ public class PortfolioController {
 
     @Autowired
     private PortfolioUserService userDetailsService;
-    
+
     @Autowired
     private JwtUtil jwtTokenUtil;
-    
+
     @PostMapping(path = "/auth")
     public ResponseEntity<?> createAuthToken(@RequestBody AuthRequest authReq) throws Exception {
         try {
             authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authReq.getUsername(), authReq.getPassword())
-            );
+                    new UsernamePasswordAuthenticationToken(authReq.getUsername(), authReq.getPassword()));
         } catch (BadCredentialsException e) {
             throw new Exception("Incorrect username or password", e);
         }
 
         final UserDetails userDetails = userDetailsService
-            .loadUserByUsername(authReq.getUsername());
+                .loadUserByUsername(authReq.getUsername());
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
