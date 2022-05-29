@@ -55,6 +55,13 @@ public class PortfolioController {
     // === END PORTFOLIO ====
             
     // === LOGIN/AUTHENTICATION ===
+    /*
+    * Based on YouTube video
+    * Credits:
+    * "Spring Boot + Spring Security + JWT from scratch - Java Brains"
+    * by Java Brains
+    * https://www.youtube.com/watch?v=X80nJ5T7YpE
+    */
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired

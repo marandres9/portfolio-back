@@ -1,3 +1,10 @@
+/*
+* Based on YouTube video
+* Credits:
+* "Spring Boot + Spring Security + JWT from scratch - Java Brains"
+* by Java Brains
+* https://www.youtube.com/watch?v=X80nJ5T7YpE
+*/
 package com.perez.portfolio.security;
 
 import java.util.Date;
