@@ -1,4 +1,4 @@
-package com.perez.portfolio.security;
+package com.perez.portfolio.service.portfolioUser;
 
 import com.perez.portfolio.repository.PortfolioUserRepository;
 

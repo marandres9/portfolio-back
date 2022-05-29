@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.perez.portfolio.security.JwtUtil;
-import com.perez.portfolio.security.PortfolioUserService;
+import com.perez.portfolio.service.portfolioUser.PortfolioUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

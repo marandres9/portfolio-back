@@ -1,6 +1,7 @@
 package com.perez.portfolio.security;
 
 import com.perez.portfolio.filters.JwtRequestFilter;
+import com.perez.portfolio.service.portfolioUser.PortfolioUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
