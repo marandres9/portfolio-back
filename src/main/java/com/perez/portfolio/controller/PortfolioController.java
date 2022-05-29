@@ -25,9 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-// @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
-@CrossOrigin
-// @CrossOrigin(origins = "https://my-portfolio-65acc.web.app/", maxAge = 3600)
+@CrossOrigin(origins = "https://my-portfolio-65acc.web.app/", maxAge = 3600)
 public class PortfolioController {
     // === PORTFOLIO ====
     @Autowired
