@@ -22,7 +22,8 @@ public class HomeController {
         return this.homeService.updateHome(home.getTitle(), home.getDescription());
     }
 
-    @GetMapping(path = "/test/gethome")
+    // TEST - Solo se usa para testear el endpoint
+    @GetMapping(path = "/test/home/get")
     public Home getHome() {
         return homeService.getHome();
     }

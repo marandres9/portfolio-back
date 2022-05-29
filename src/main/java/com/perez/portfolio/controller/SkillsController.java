@@ -1,11 +1,14 @@
 package com.perez.portfolio.controller;
 
+import java.util.List;
+
 import com.perez.portfolio.model.Skill;
 import com.perez.portfolio.service.skill.SkillService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,6 +34,12 @@ public class SkillsController {
     @PostMapping(path = "/portfolio/edit/skills/save")
     public Skill saveSkill(@RequestBody Skill skill) {
         return this.skillService.saveSkill(skill);
+    }
+
+    // TEST - Solo se usa para testear el endpoint
+    @GetMapping(path = "/test/skills/get")
+    public List<Skill> getSkills() {
+        return this.skillService.getAll();
     }
 
 }
