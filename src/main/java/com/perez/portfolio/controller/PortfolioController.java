@@ -25,21 +25,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@CrossOrigin(origins = "https://my-portfolio-65acc.web.app/", maxAge = 3600)
+// @CrossOrigin(origins = "https://my-portfolio-65acc.web.app/", maxAge = 3600)
+@CrossOrigin()
 public class PortfolioController {
     // === PORTFOLIO ====
-    @Autowired
-    HomeService homeService;
-    @Autowired
-    AboutService aboutService;
-    @Autowired
-    SkillService skillService;
-    @Autowired
-    EducationService educationService;
-    @Autowired
-    ExperienceService experienceService;
-    @Autowired
-    ProjectService projectService;
+    @Autowired HomeService homeService;
+    @Autowired AboutService aboutService;
+    @Autowired SkillService skillService;
+    @Autowired EducationService educationService;
+    @Autowired ExperienceService experienceService;
+    @Autowired ProjectService projectService;
 
     @GetMapping(path = "/portfolio/get")
     public PortfolioDTO getPortfolio() {
@@ -56,12 +51,12 @@ public class PortfolioController {
             
     // === LOGIN/AUTHENTICATION ===
     /*
-    * Based on YouTube video
-    * Credits:
-    * "Spring Boot + Spring Security + JWT from scratch - Java Brains"
-    * by Java Brains
-    * https://www.youtube.com/watch?v=X80nJ5T7YpE
-    */
+* Based on YouTube video
+* Credits:
+* "Spring Boot + Spring Security + JWT from scratch - Java Brains"
+* by Java Brains
+* https://www.youtube.com/watch?v=X80nJ5T7YpE
+*/
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired

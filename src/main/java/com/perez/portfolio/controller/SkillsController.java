@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-// @CrossOrigin(origins = "https://my-portfolio-65acc.web.app/", maxAge = 3600)
-@CrossOrigin()
+@CrossOrigin(origins = "https://my-portfolio-65acc.web.app/", maxAge = 3600)
 public class SkillsController {
     @Autowired
     SkillService skillService;
