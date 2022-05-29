@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "https://my-portfolio-65acc.web.app/", maxAge = 3600)
 public class HomeController {
     @Autowired
     HomeService homeService;
