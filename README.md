@@ -20,10 +20,17 @@ El portfolio web está dividido en secciones. En la capa fontend, inicialmente s
 
 Esta aplicación permite acceder a las bases de datos para obtener o modificar sus contenidos y mediante sus controladores REST (uno para cada tabla/sección) expone endpoints para que sean utilizados por el cliente.
 
-Los endpoints provistos por la API son los siguientes:
-- DTO del portfolio: */portfolio/get*
-- Edición del portfolio: siguen el siguiente patrón */portfolio/edit/**{seccion}**/**{operacion}**/*
-
+Los endpoints provistos por la API permiten las operaciones **delete, update, save** y son los siguientes:
+- DTO del portfolio: 
+    * */portfolio/get*
+- Edición del portfolio: siguen el siguiente patrón */portfolio/edit/**{seccion}**/**{operacion}**/**{opcional: id}***
+    * Ejemplo: */portfolio/edit/skills/delete/3* --> Elimina la fila con ID == 3 de la tabla *skills*.
+    * Ejemplo: */portfolio/edit/projects/save* --> Agrega una nueva entrada a la tabla *projects*. Se debe incluir un objeto dle tipo *Project* en el Request-Body
+    * Ejemplo: */portfolio/edit/education/update/2* --> Reemplaza la fila con ID == 2 de la tabla *education* por un objeto de tipo *Education* que se debe enviar en el Request-Body.
+- Endpoints de prueba:
+    * */test/home/get/*
+    * */test/skills/get*
+    
 Además, la aplicaciión backend cuenta con un servicio de autenticación, el cual mediante un filtro es capaz de interceptar cualquier solicitud desde el frontend y veirificar si el usuario esta autorizado a acceder o a llevar a cabo operaciones sobre la base de datos. 
 
 La aplicación provee únicamente dos endpoints a los que un usuario no autenticado con un token JWT puede acceder. Dichos endpoints son *"/portfolio/get"* y *"/auth"*, cuyas respectivas funciones son la de devolver un objeto DTO que contiene toda la información del portfolio que se encargará de mostrar la aplicación frontend, y la de autenticar a un usuario enviando las credenciales al servidor y devolviendo el token JWT o avisando que son inválidas. Esto es así ya que cualquier cliente debe poder visualizar el portfolio e iniciar sesión.
