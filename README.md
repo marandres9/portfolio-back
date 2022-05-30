@@ -31,6 +31,7 @@ A continuación se muestra el proceso de autenticación. Se hace una petición P
 ![](img/post_auth.png)
 
 **Importante:** Tener en cuenta que para realizar peticiones HTTP *no simples* desde un cliente como Postman/Hoppscotch o desde la terminal utilizando cURL/wget se debe cambiar la configuración CORS del controlador REST, ya que en la versión final desplegada en Heroku solo se aceptan peticiones desde el origen especifico de la aplicación frontend. Para el ejemplo de inicio de sesión, que requiere del método HTTP POST, se realizó la siguiente modificación, reemplazando la anotación *@CrossOrigin* original por una sin parámetros, para permitir peticiones desde cualquier origen:
+
 ![](img/modif_cors.png)
 
 Por último, se muestra una petición GET realizada a endpoints de prueba. Los mismos requieren de autorización, por lo que deben incluir una cabecera de tipo *Authorization*, y devuelven los contenidos de las secciones **Home** y **Skills** del portfolio. Como se mencionó, estos endpoints son solo de prueba y no son utilizados por la aplicación frontend.
