@@ -8,6 +8,8 @@ Desarrollada con [Spring Boot](https://spring.io/projects/spring-boot) y hostead
 
 Repositorio de la capa frontend: [github.com/marandres9/portfolio-front](https://github.com/marandres9/portfolio-front)
 
+URL de la aplicación backend: [my-portfolio-backend9.herokuapp.com/](https://my-portfolio-backend9.herokuapp.com/)
+
 El portfolio web está dividido en secciones. En la capa fontend, inicialmente se recibe un DTO con toda la información que debe mostrar cada sección y luego los datos de cada una son distribuidos a sus respectivos componentes, los cuales se encargan de mostrarlos. La base de datos de este portfolio contiene una tabla para cada una de las secciones, las cuales son:
 - Home (Da una breve descripción del portfolio)
 - About (Información sobre el autor)
