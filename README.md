@@ -28,7 +28,7 @@ Los endpoints provistos por la API permiten las operaciones **delete, update, sa
     * Ejemplo: */portfolio/edit/projects/save* --> Agrega una nueva entrada a la tabla *projects*. Se debe incluir un objeto dle tipo *Project* en el Request-Body
     * Ejemplo: */portfolio/edit/education/update/2* --> Reemplaza la fila con ID == 2 de la tabla *education* por un objeto de tipo *Education* que se debe enviar en el Request-Body.
 - Endpoints de prueba. Devuelven los datos de las secciones *home* y *skills*:
-    * */test/home/get/*
+    * */test/home/get*
     * */test/skills/get*
     
 Además, la aplicaciión backend cuenta con un servicio de autenticación, el cual mediante un filtro es capaz de interceptar cualquier solicitud desde el frontend y veirificar si el usuario esta autorizado a acceder o a llevar a cabo operaciones sobre la base de datos. 
