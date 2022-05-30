@@ -27,7 +27,7 @@ Los endpoints provistos por la API permiten las operaciones **delete, update, sa
     * Ejemplo: */portfolio/edit/skills/delete/3* --> Elimina la fila con ID == 3 de la tabla *skills*.
     * Ejemplo: */portfolio/edit/projects/save* --> Agrega una nueva entrada a la tabla *projects*. Se debe incluir un objeto dle tipo *Project* en el Request-Body
     * Ejemplo: */portfolio/edit/education/update/2* --> Reemplaza la fila con ID == 2 de la tabla *education* por un objeto de tipo *Education* que se debe enviar en el Request-Body.
-- Endpoints de prueba:
+- Endpoints de prueba. Devuelven los datos de las secciones *home* y *skills*:
     * */test/home/get/*
     * */test/skills/get*
     
