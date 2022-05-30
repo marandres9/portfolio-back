@@ -25,9 +25,11 @@ La aplicación provee únicamente dos endpoints a los que un usuario no autentic
 Por otra parte, cualquier operación que modifique los contenidos de la página deberá realizarla un usuario autorizado con un token JWT.
 
 En la siguiente imagen se muestra la llamada a la API que devuelve los datos del portfolio. El objeto sería recibido por el frontend y distribuido en sus componentes.
+
 ![](img/get_portfolio.png)
 
 A continuación se muestra el proceso de autenticación. Se hace una petición POST al endpoint */auth* enviando las credenciales y se recibe el token JWT que deberá ser incluido en la cabecera *Authorization* para cualquiera de las peticiones que requiran de autorización.
+
 ![](img/post_auth.png)
 
 **Importante:** Tener en cuenta que para realizar peticiones HTTP *no simples* desde un cliente como Postman/Hoppscotch o desde la terminal utilizando cURL/wget se debe cambiar la configuración CORS del controlador REST, ya que en la versión final desplegada en Heroku solo se aceptan peticiones desde el origen especifico de la aplicación frontend. Para el ejemplo de inicio de sesión, que requiere del método HTTP POST, se realizó la siguiente modificación, reemplazando la anotación *@CrossOrigin* original por una sin parámetros, para permitir peticiones desde cualquier origen:
@@ -37,8 +39,10 @@ A continuación se muestra el proceso de autenticación. Se hace una petición P
 Por último, se muestra una petición GET realizada a endpoints de prueba. Los mismos requieren de autorización, por lo que deben incluir una cabecera de tipo *Authorization*, y devuelven los contenidos de las secciones **Home** y **Skills** del portfolio. Como se mencionó, estos endpoints son solo de prueba y no son utilizados por la aplicación frontend.
 
 Llamadas a los endpoints */test/home/get/*  y a */test/skills/get/* utilizando el token JWT recibido en el ejemplo de autenticación:
+
 ![](img/get_auth_home.png)
 ![](img/get_auth_skills.png)
 
 Si no se envía un JWT en la cabecera de la petición, se obtiene un error HTTP 403, ya que el usuario no esta autorizado a realizar esa operación:
+
 ![](img/get_auth_forbidden.png)
